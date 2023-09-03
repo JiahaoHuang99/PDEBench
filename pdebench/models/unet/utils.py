@@ -304,8 +304,8 @@ class UNetDatasetSingle(Dataset):
                     self.data = np.concatenate([_data, self.data], axis=-1)
                     self.data = self.data[:, :, :, :, None]  # batch, x, y, t, ch
 
-        if num_samples_max>0:
-            num_samples_max  = min(num_samples_max,self.data.shape[0])
+        if num_samples_max > 0:
+            num_samples_max = min(num_samples_max,self.data.shape[0])
         else:
             num_samples_max = self.data.shape[0]
 
