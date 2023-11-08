@@ -1,14 +1,17 @@
 # PDEBench
 
 The code repository for the NeurIPS 2022 paper 
-[PDEBench: An Extensive Benchmark for Scientific Machine Learning](https://arxiv.org/abs/2210.07182)
+[PDEBench: An Extensive Benchmark for Scientific Machine Learning](https://arxiv.org/abs/2210.07182) 
+
+:tada: [**SimTech Best Paper Award 2023**](https://www.simtech.uni-stuttgart.de/press/SimTech-Best-Paper-Award-2023-Benchmark-for-ML-for-scientific-simulations) :confetti_ball:
 
 PDEBench provides a diverse and comprehensive set of benchmarks for scientific machine learning, including challenging and realistic physical problems. This repository consists of the code used to generate the datasets, to upload and download the datasets from the data repository, as well as to train and evaluate different machine learning models as baselines. PDEBench features a much wider range of PDEs than existing benchmarks and includes realistic and difficult problems (both forward and inverse), larger ready-to-use datasets comprising various initial and boundary conditions, and PDE parameters. Moreover, PDEBench was created to make the source code extensible and we invite active participation from the SciML community to improve and extend the benchmark.
 
 ![Visualizations of some PDE problems covered by the benchmark.](https://github.com/pdebench/PDEBench/blob/main/pdebench_examples.PNG)
 
-
 Created and maintained by Makoto Takamoto `<makoto.takamoto@neclab.eu, takamtmk@gmail.com>`, Timothy Praditia `<timothy.praditia@iws.uni-stuttgart.de>`, Raphael Leiteritz, Dan MacKinlay, Francesco Alesiani, Dirk Pflüger, and Mathias Niepert.
+
+---------------
 
 ## Datasets and Pretrained Models
 
@@ -28,31 +31,42 @@ DOIs
 
 ## Installation
 
-    pip install .
-
-## Requirements
-
 ### Using pip
+
+Locally:
 ```bash
-python3 -m venv ./venv --prompt pde_benchmark --system-site-packages 
-. ./venv/bin/activate
 pip install --upgrade pip wheel
-pip install -r requirements.txt
+pip install .
 ```
 
-The minimum required packages to train and run the baseline ML models are listed in [requirements.txt](./requirements.txt).
+From PyPI:
+```bash
+pip install pdebench
+```
 
-To run the data generation scripts, the complete package requirements are listed in [requirements_datagen.txt](./requirements_datagen.txt)
+To include dependencies for data generation:
+```bash
+pip install "pdebench[datagen310]"
+pip install ".[datagen310]" # locally
+```
+or
+```bash
+pip install "pdebench[datagen39]"
+pip install ".[datagen39]" # locally
+```
+
+### GPU Support
 
 For GPU support there are additional platform-specific instructions:
 
-For PyTorch, [see here](https://pytorch.org/get-started/locally/).
+For PyTorch, the latest version we support is v1.13.1 [see previous-versions/#linux - CUDA 11.7](https://pytorch.org/get-started/previous-versions/#linux-and-windows-2).
 
-For JAX, which is approximately 6 times faster for simulations than PyTorch in our tests, [see here](https://github.com/google/jax#installation)
+For JAX, which is approximately 6 times faster for simulations than PyTorch in our tests, [see jax#pip-installation-gpu-cuda-installed-via-pip](https://github.com/google/jax#pip-installation-gpu-cuda-installed-via-pip-easier)
 
-### Using conda:
 
-If you like you can also install dependencies using anaconda. We suggest using [miniforge](https://github.com/conda-forge/miniforge) (and possibly mamba) as distribution. Otherwise you may have to __enable the conda-forge__ channel for the following commands.
+## Installation using conda:
+
+If you like you can also install dependencies using anaconda, we suggest to use [mambaforge](https://github.com/conda-forge/miniforge#mambaforge) as a distribution. Otherwise you may have to __enable the conda-forge__ channel for the following commands.
 
 Starting from a fresh environment:
 
@@ -63,24 +77,27 @@ conda activate myenv
 
 Install dependencies for model training:
 ```
-conda install deepxde hydra-core h5py
+conda install deepxde hydra-core h5py -c conda-forge
 ```
 
-[Install PyTorch](https://pytorch.org/get-started/locally/) according to your hardware requirements: 
+According to your hardware availability, either install PyTorch with CUDA support:
 
-E.g.
+ - [see previous-versions/#linux - CUDA 11.7](https://pytorch.org/get-started/previous-versions/#linux-and-windows-2).
+
 ```
-conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
+
+ - [or CPU only binaries](https://pytorch.org/get-started/previous-versions/#linux-and-windows-2).
+
+```
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 cpuonly -c pytorch
+```
+
 
 Optional dependencies for data generation:
 ```
 conda install clawpack jax jaxlib python-dotenv
-```
-
-Optional dependencies for data downloading:
-```
-pip install pyDarus~=1.0.5
 ```
 
 ## Configuring DeepXDE
@@ -285,11 +302,17 @@ Below is an illustration of the directory structure of PDEBench.
 ```
 
 
-
 ------
 
-
 ## Citations
+
+Please cite the following papers if you use PDEBench datasets and/or source code in your research.
+
+<details>
+<summary>
+    <a href="https://arxiv.org/abs/2210.07182">PDEBench: An Extensive Benchmark for Scientific Machine Learning - NeurIPS'2022 </a>
+</summary>
+<br/>
 
 ```
 @inproceedings{PDEBench2022,
@@ -299,8 +322,18 @@ year = {2022},
 booktitle = {36th Conference on Neural Information Processing Systems (NeurIPS 2022) Track on Datasets and Benchmarks},
 url = {https://arxiv.org/abs/2210.07182}
 }
+```
+
+</details>
 
 
+<details>
+<summary>
+    <a href="https://doi.org/10.18419/darus-2986">PDEBench Datasets - NeurIPS'2022 </a>
+</summary>
+<br/>
+
+```
 @data{darus-2986_2022,
 author = {Takamoto, Makoto and Praditia, Timothy and Leiteritz, Raphael and MacKinlay, Dan and Alesiani, Francesco and Pflüger, Dirk and Niepert, Mathias},
 publisher = {DaRUS},
@@ -310,6 +343,33 @@ doi = {10.18419/darus-2986},
 url = {https://doi.org/10.18419/darus-2986}
 }
 ```
+</details>
+
+<details>
+<summary>
+    <a href="https://arxiv.org/abs/2304.14118">Learning Neural PDE Solvers with Parameter-Guided Channel Attention - ICML'2023 </a>
+</summary>
+<br/>
+
+ ```
+ @article{cape-takamoto:2023,
+      author   = {Makoto Takamoto and
+                  Francesco Alesiani and
+                  Mathias Niepert},
+  title        = {Learning Neural {PDE} Solvers with Parameter-Guided Channel Attention},
+  journal      = {CoRR},
+  volume       = {abs/2304.14118},
+  year         = {2023},
+  url          = {https://doi.org/10.48550/arXiv.2304.14118},
+  doi          = {10.48550/arXiv.2304.14118},
+  eprinttype    = {arXiv},
+  eprint       = {2304.14118},
+  }
+ ```
+
+</details>
+
+------
 
 ## Code contributors
 

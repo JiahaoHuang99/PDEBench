@@ -155,14 +155,12 @@ from functools import partial
 
 from timeit import default_timer
 
-from pdebench.models.fno.train import run_training as run_training_FNO
-from pdebench.models.pinn.train import run_training as run_training_PINN
-from pdebench.models.unet.train import run_training as run_training_Unet
 
 
-@hydra.main(config_path="config", config_name="config")
+@hydra.main(version_base="1.2", config_path="config", config_name="config_rdb")
 def main(cfg: DictConfig):
     if cfg.args.model_name == "FNO":
+        from pdebench.models.fno.train import run_training as run_training_FNO
         print("FNO")
         run_training_FNO(
             if_training=cfg.args.if_training,
@@ -172,6 +170,7 @@ def main(cfg: DictConfig):
             width=cfg.args.width,
             initial_step=cfg.args.initial_step,
             t_train=cfg.args.t_train,
+            training_type=cfg.args.training_type,
             num_channels=cfg.args.num_channels,
             batch_size=cfg.args.batch_size,
             epochs=cfg.args.epochs,
@@ -181,6 +180,7 @@ def main(cfg: DictConfig):
             model_update=cfg.args.model_update,
             flnm=cfg.args.filename,
             single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
             reduced_resolution=cfg.args.reduced_resolution,
             reduced_resolution_t=cfg.args.reduced_resolution_t,
             reduced_batch=cfg.args.reduced_batch,
@@ -194,6 +194,7 @@ def main(cfg: DictConfig):
             t_max=cfg.args.t_max,
         )
     elif cfg.args.model_name == "Unet":
+        from pdebench.models.unet.train import run_training as run_training_Unet
         print("Unet")
         run_training_Unet(
             if_training=cfg.args.if_training,
@@ -214,6 +215,7 @@ def main(cfg: DictConfig):
             model_update=cfg.args.model_update,
             flnm=cfg.args.filename,
             single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
             reduced_resolution=cfg.args.reduced_resolution,
             reduced_resolution_t=cfg.args.reduced_resolution_t,
             reduced_batch=cfg.args.reduced_batch,
@@ -227,6 +229,8 @@ def main(cfg: DictConfig):
             t_max=cfg.args.t_max,
         )
     elif cfg.args.model_name == "PINN":
+        # not importing globally as DeepXDE changes some global PyTorch settings
+        from pdebench.models.pinn.train import run_training as run_training_PINN
         print("PINN")
         run_training_PINN(
             scenario=cfg.args.scenario,
