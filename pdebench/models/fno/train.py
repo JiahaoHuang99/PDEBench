@@ -141,6 +141,11 @@ def run_training(if_training,
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step, gamma=scheduler_gamma)
     
     loss_fn = nn.MSELoss(reduction="mean")
+
+    ## Check here
+    # from util_loss import LpLoss
+    # loss_fn = LpLoss()
+
     loss_val_min = np.infty
     
     start_epoch = 0
