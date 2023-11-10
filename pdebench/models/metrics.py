@@ -299,6 +299,9 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
                     pred = torch.cat((pred, im), -2)
                     xx = torch.cat((xx[..., 1:, :], im), dim=-2)
 
+                # _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F \
+                #     = metric_func(pred[..., 1:, :], yy[..., 1:, :], if_mean=True, Lx=Lx, Ly=Ly, Lz=Lz)
+
                 _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F \
                     = metric_func(pred, yy, if_mean=True, Lx=Lx, Ly=Ly, Lz=Lz)
 
@@ -343,8 +346,12 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
                     pred = torch.cat((pred, im), -2)
                     xx = torch.cat((xx[..., 1:, :], im), dim=-2)
 
+                # _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F \
+                #     = metric_func(pred[..., 1:, :], yy[..., 1:, :], if_mean=True, Lx=Lx, Ly=Ly, Lz=Lz)
+
                 _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F \
                     = metric_func(pred, yy, if_mean=True, Lx=Lx, Ly=Ly, Lz=Lz)
+
                 if itot == 0:
                     err_RMSE, err_nRMSE, err_CSV, err_Max, err_BD, err_F \
                         = _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F

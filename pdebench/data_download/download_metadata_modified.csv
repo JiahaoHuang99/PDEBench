@@ -1,4 +1,8 @@
 PDE,Filename,URL,Path,MD5
-2d_cfd,2D_CFD_Rand_M1.0_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164692,2D/CFD/2D_Train_Rand/,04fcc44c39acea69e2869b84cd653d4a
+2d_cfd,2D_CFD_Rand_M0.1_Eta0.01_Zeta0.01_periodic_128_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164687,2D/CFD/2D_Train_Rand/,5b21dcccaef4d2145ca579a71153c580
+2d_cfd,2D_CFD_Rand_M0.1_Eta0.1_Zeta0.1_periodic_128_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164688,2D/CFD/2D_Train_Rand/,b2733888745a1d64e36df813e979910b
+2d_cfd,2D_CFD_Rand_M0.1_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164689,2D/CFD/2D_Train_Rand/,ae2552864d0856f58dc74132a2f95d20
+2d_cfd,2D_CFD_Rand_M1.0_Eta0.01_Zeta0.01_periodic_128_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164690,2D/CFD/2D_Train_Rand/,21969082d0e9524bcc4708e216148e60
+2d_cfd,2D_CFD_Rand_M1.0_Eta0.1_Zeta0.1_periodic_128_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164691,2D/CFD/2D_Train_Rand/,75a34f34a3dcd9bc8ae4b7adf8bf372c
 2d_cfd,2D_CFD_Turb_M0.1_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164685,2D/CFD/2D_Train_Turb/,844555000d342d2947162c6cf46798e7
 2d_cfd,2D_CFD_Turb_M1.0_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5,https://darus.uni-stuttgart.de/api/access/datafile/164686,2D/CFD/2D_Train_Turb/,3f2c7376cde5fb072db0f9814f1c6992

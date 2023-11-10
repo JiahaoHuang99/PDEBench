@@ -221,7 +221,8 @@ def main():
     
     fig, ax = plt.subplots(figsize=(8,6))
     for i in range(num_models):
-        pos = x-0.3 + 0.5/(num_models-1)*i
+        # pos = x-0.3 + 0.5/(num_models-1)*i
+        pos = x - 0.3 + 0.5 / (num_models) * (i + 1)
         ax.bar(pos, data[data.index.isin([models[i]],level=2)]['MSE'], width)
     
     ax.set_xticks(x)
