@@ -193,6 +193,202 @@ def main(cfg: DictConfig):
             t_min=cfg.args.t_min,
             t_max=cfg.args.t_max,
         )
+    if cfg.args.model_name == "PINO":
+        from pdebench.models.pino.train import run_training as run_training_PINO
+        print("PINO")
+        run_training_PINO(
+            if_training=cfg.args.if_training,
+            continue_training=cfg.args.continue_training,
+            num_workers=cfg.args.num_workers,
+            modes=cfg.args.modes,
+            width=cfg.args.width,
+            initial_step=cfg.args.initial_step,
+            t_train=cfg.args.t_train,
+            training_type=cfg.args.training_type,
+            num_channels=cfg.args.num_channels,
+            batch_size=cfg.args.batch_size,
+            epochs=cfg.args.epochs,
+            learning_rate=cfg.args.learning_rate,
+            scheduler_step=cfg.args.scheduler_step,
+            scheduler_gamma=cfg.args.scheduler_gamma,
+            model_update=cfg.args.model_update,
+            flnm=cfg.args.filename,
+            single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
+            reduced_resolution=cfg.args.reduced_resolution,
+            reduced_resolution_t=cfg.args.reduced_resolution_t,
+            reduced_resolution_phys=cfg.args.reduced_resolution_phys,
+            reduced_resolution_t_phys=cfg.args.reduced_resolution_t_phys,
+            reduced_batch=cfg.args.reduced_batch,
+            plot=cfg.args.plot,
+            channel_plot=cfg.args.channel_plot,
+            x_min=cfg.args.x_min,
+            x_max=cfg.args.x_max,
+            y_min=cfg.args.y_min,
+            y_max=cfg.args.y_max,
+            t_min=cfg.args.t_min,
+            t_max=cfg.args.t_max,
+            weight_loss_phys=cfg.args.weight_loss_phys,
+            weight_loss_data=cfg.args.weight_loss_data,
+            task_name=cfg.args.task_name,
+        )
+    if cfg.args.model_name == "PINO_A":
+        from pdebench.models.pino.train_a import run_training as run_training_PINO
+        print("PINO")
+        run_training_PINO(
+            if_training=cfg.args.if_training,
+            continue_training=cfg.args.continue_training,
+            num_workers=cfg.args.num_workers,
+            modes=cfg.args.modes,
+            width=cfg.args.width,
+            initial_step=cfg.args.initial_step,
+            t_train=cfg.args.t_train,
+            training_type=cfg.args.training_type,
+            num_channels=cfg.args.num_channels,
+            batch_size=cfg.args.batch_size,
+            epochs=cfg.args.epochs,
+            learning_rate=cfg.args.learning_rate,
+            scheduler_step=cfg.args.scheduler_step,
+            scheduler_gamma=cfg.args.scheduler_gamma,
+            model_update=cfg.args.model_update,
+            flnm=cfg.args.filename,
+            single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
+            reduced_resolution=cfg.args.reduced_resolution,
+            reduced_resolution_t=cfg.args.reduced_resolution_t,
+            reduced_resolution_phys=cfg.args.reduced_resolution_phys,
+            reduced_resolution_t_phys=cfg.args.reduced_resolution_t_phys,
+            reduced_batch=cfg.args.reduced_batch,
+            plot=cfg.args.plot,
+            channel_plot=cfg.args.channel_plot,
+            x_min=cfg.args.x_min,
+            x_max=cfg.args.x_max,
+            y_min=cfg.args.y_min,
+            y_max=cfg.args.y_max,
+            t_min=cfg.args.t_min,
+            t_max=cfg.args.t_max,
+            weight_loss_phys=cfg.args.weight_loss_phys,
+            weight_loss_data=cfg.args.weight_loss_data,
+            task_name=cfg.args.task_name,
+        )
+    if cfg.args.model_name == "PINO_B":
+        from pdebench.models.pino.train_b import run_training as run_training_PINO
+        print("PINO")
+        run_training_PINO(
+            if_training=cfg.args.if_training,
+            continue_training=cfg.args.continue_training,
+            num_workers=cfg.args.num_workers,
+            modes=cfg.args.modes,
+            width=cfg.args.width,
+            initial_step=cfg.args.initial_step,
+            t_train=cfg.args.t_train,
+            training_type=cfg.args.training_type,
+            num_channels=cfg.args.num_channels,
+            batch_size=cfg.args.batch_size,
+            epochs=cfg.args.epochs,
+            learning_rate=cfg.args.learning_rate,
+            scheduler_step=cfg.args.scheduler_step,
+            scheduler_gamma=cfg.args.scheduler_gamma,
+            model_update=cfg.args.model_update,
+            flnm=cfg.args.filename,
+            single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
+            reduced_resolution=cfg.args.reduced_resolution,
+            reduced_resolution_t=cfg.args.reduced_resolution_t,
+            reduced_resolution_phys=cfg.args.reduced_resolution_phys,
+            reduced_resolution_t_phys=cfg.args.reduced_resolution_t_phys,
+            reduced_batch=cfg.args.reduced_batch,
+            plot=cfg.args.plot,
+            channel_plot=cfg.args.channel_plot,
+            x_min=cfg.args.x_min,
+            x_max=cfg.args.x_max,
+            y_min=cfg.args.y_min,
+            y_max=cfg.args.y_max,
+            t_min=cfg.args.t_min,
+            t_max=cfg.args.t_max,
+            weight_loss_phys=cfg.args.weight_loss_phys,
+            weight_loss_data=cfg.args.weight_loss_data,
+            task_name=cfg.args.task_name,
+        )
+
+    if cfg.args.model_name == "PINO_C":
+        from pdebench.models.pino.train_c import run_training as run_training_PINO
+        print("PINO")
+        run_training_PINO(
+            if_training=cfg.args.if_training,
+            continue_training=cfg.args.continue_training,
+            num_workers=cfg.args.num_workers,
+            modes=cfg.args.modes,
+            width=cfg.args.width,
+            initial_step=cfg.args.initial_step,
+            t_train=cfg.args.t_train,
+            training_type=cfg.args.training_type,
+            num_channels=cfg.args.num_channels,
+            batch_size=cfg.args.batch_size,
+            epochs=cfg.args.epochs,
+            learning_rate=cfg.args.learning_rate,
+            scheduler_step=cfg.args.scheduler_step,
+            scheduler_gamma=cfg.args.scheduler_gamma,
+            model_update=cfg.args.model_update,
+            flnm=cfg.args.filename,
+            single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
+            reduced_resolution=cfg.args.reduced_resolution,
+            reduced_resolution_t=cfg.args.reduced_resolution_t,
+            reduced_resolution_phys=cfg.args.reduced_resolution_phys,
+            reduced_resolution_t_phys=cfg.args.reduced_resolution_t_phys,
+            reduced_batch=cfg.args.reduced_batch,
+            plot=cfg.args.plot,
+            channel_plot=cfg.args.channel_plot,
+            x_min=cfg.args.x_min,
+            x_max=cfg.args.x_max,
+            y_min=cfg.args.y_min,
+            y_max=cfg.args.y_max,
+            t_min=cfg.args.t_min,
+            t_max=cfg.args.t_max,
+            weight_loss_phys=cfg.args.weight_loss_phys,
+            weight_loss_data=cfg.args.weight_loss_data,
+            task_name=cfg.args.task_name,
+        )
+    if cfg.args.model_name == "PINO_D":
+        from pdebench.models.pino.train_d import run_training as run_training_PINO
+        print("PINO")
+        run_training_PINO(
+            if_training=cfg.args.if_training,
+            continue_training=cfg.args.continue_training,
+            num_workers=cfg.args.num_workers,
+            modes=cfg.args.modes,
+            width=cfg.args.width,
+            initial_step=cfg.args.initial_step,
+            t_train=cfg.args.t_train,
+            training_type=cfg.args.training_type,
+            num_channels=cfg.args.num_channels,
+            batch_size=cfg.args.batch_size,
+            epochs=cfg.args.epochs,
+            learning_rate=cfg.args.learning_rate,
+            scheduler_step=cfg.args.scheduler_step,
+            scheduler_gamma=cfg.args.scheduler_gamma,
+            model_update=cfg.args.model_update,
+            flnm=cfg.args.filename,
+            single_file=cfg.args.single_file,
+            base_path=cfg.args.data_path,
+            reduced_resolution=cfg.args.reduced_resolution,
+            reduced_resolution_t=cfg.args.reduced_resolution_t,
+            reduced_resolution_phys=cfg.args.reduced_resolution_phys,
+            reduced_resolution_t_phys=cfg.args.reduced_resolution_t_phys,
+            reduced_batch=cfg.args.reduced_batch,
+            plot=cfg.args.plot,
+            channel_plot=cfg.args.channel_plot,
+            x_min=cfg.args.x_min,
+            x_max=cfg.args.x_max,
+            y_min=cfg.args.y_min,
+            y_max=cfg.args.y_max,
+            t_min=cfg.args.t_min,
+            t_max=cfg.args.t_max,
+            weight_loss_phys=cfg.args.weight_loss_phys,
+            weight_loss_data=cfg.args.weight_loss_data,
+            task_name=cfg.args.task_name,
+        )
     elif cfg.args.model_name == "Unet":
         from pdebench.models.unet.train import run_training as run_training_Unet
         print("Unet")
@@ -248,6 +444,24 @@ def main(cfg: DictConfig):
         )
 
 
+def set_seed(seed):
+    import random
+    import numpy as np
+    import torch
+    import torch.backends.cudnn as cudnn
+
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    cudnn.deterministic=True
+    cudnn.benchmark=False
+
+
 if __name__ == "__main__":
+    import warnings
+    warnings.filterwarnings('ignore', category=UserWarning, message='.*torch.meshgrid.*')
+
+    set_seed(0)
     main()
     print("Done.")

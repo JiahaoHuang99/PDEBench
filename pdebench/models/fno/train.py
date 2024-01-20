@@ -1,3 +1,4 @@
+import os
 import sys
 import torch
 import numpy as np
@@ -10,6 +11,7 @@ from functools import reduce
 from functools import partial
 
 from timeit import default_timer
+import wandb
 
 # torch.manual_seed(0)
 # np.random.seed(0)
@@ -19,6 +21,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 from pdebench.models.fno.fno import FNO1d, FNO2d, FNO3d
 from pdebench.models.fno.utils import FNODatasetSingle, FNODatasetMult
 from pdebench.models.metrics import metrics
+
+def mkdir(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 def run_training(if_training,
                  continue_training,
@@ -163,6 +169,20 @@ def run_training(if_training,
         
         return
 
+    os.environ['WANDB_MODE'] = 'online'
+    wandb.init(project='PINO_DR',
+               entity="jiahaohuang",
+               name=f'FNO')
+    wandb.define_metric("Epoch")
+    wandb.define_metric('Learning Rate', step_metric="Epoch")
+    wandb.define_metric('TRAIN LOSS/Loss_MSE')
+    wandb.define_metric('TRAIN LOSS/Loss_MSE_Data')
+    wandb.define_metric('TRAIN LOSS Epoch/Loss_MSE', step_metric="Epoch")
+    wandb.define_metric('TRAIN LOSS Epoch/Loss_MSE_Data', step_metric="Epoch")
+    wandb.define_metric('VAL LOSS Epoch/Loss_MSE', step_metric="Epoch")
+    wandb.define_metric('VAL LOSS Epoch/Loss_MSE_Data', step_metric="Epoch")
+    wandb.watch(model)
+
     # If desired, restore the network by loading the weights saved in the .pt
     # file
     if continue_training:
@@ -187,6 +207,7 @@ def run_training(if_training,
         t1 = default_timer()
         train_l2_step = 0
         train_l2_full = 0
+        step = 0
         for xx, yy, grid in train_loader:
             loss = 0
             
@@ -233,9 +254,14 @@ def run_training(if_training,
                 train_l2_step += loss.item()
                 _batch = yy.size(0)
                 _yy = yy[..., :t_train, :]  # if t_train is not -1
-                l2_full = loss_fn(pred.reshape(_batch, -1), _yy.reshape(_batch, -1))
+                l2_full = loss_fn(pred[..., initial_step:, :].reshape(_batch, -1), _yy[..., initial_step:, :].reshape(_batch, -1))
                 train_l2_full += l2_full.item()
-        
+
+                log_wandb = {}
+                log_wandb['TRAIN LOSS/Loss_MSE'] = l2_full.item()
+                log_wandb['TRAIN LOSS/Loss_MSE_Data'] = l2_full.item()
+                wandb.log(log_wandb)
+
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
@@ -253,12 +279,20 @@ def run_training(if_training,
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
+            step += 1
+
+        log_wandb = {'Epoch': ep}
+        log_wandb['TRAIN LOSS Epoch/Loss_MSE'] = train_l2_full / (step+1)
+        log_wandb['TRAIN LOSS Epoch/Loss_MSE_Data'] = train_l2_full / (step+1)
+        wandb.log(log_wandb)
 
         if ep % model_update == 0:
+            step_val = 0
             val_l2_step = 0
             val_l2_full = 0
             with torch.no_grad():
                 for xx, yy, grid in val_loader:
+
                     loss = 0
                     xx = xx.to(device)
                     yy = yy.to(device)
@@ -283,9 +317,9 @@ def run_training(if_training,
             
                         val_l2_step += loss.item()
                         _batch = yy.size(0)
-                        _pred = pred[..., initial_step:t_train, :]
-                        _yy = yy[..., initial_step:t_train, :]
-                        val_l2_full += loss_fn(_pred.reshape(_batch, -1), _yy.reshape(_batch, -1)).item()
+                        _pred = pred[..., :t_train, :]
+                        _yy = yy[..., :t_train, :]
+                        val_l2_full += loss_fn(_pred[..., initial_step:, :].reshape(_batch, -1), _yy[..., initial_step:, :].reshape(_batch, -1)).item()
 
                     if training_type in ['single']:
                         x = xx[..., 0 , :]
@@ -296,8 +330,14 @@ def run_training(if_training,
             
                         val_l2_step += loss.item()
                         val_l2_full += loss.item()
-                
-                if  val_l2_full < loss_val_min:
+
+                    step_val+=1
+
+                log_wandb['VAL LOSS Epoch/Loss_MSE'] = val_l2_full / (step_val+1)
+                log_wandb['VAL LOSS Epoch/Loss_MSE_Data'] = val_l2_full / (step_val+1)
+                wandb.log(log_wandb)
+
+                if val_l2_full < loss_val_min:
                     loss_val_min = val_l2_full
                     torch.save({
                         'epoch': ep,
@@ -305,9 +345,21 @@ def run_training(if_training,
                         'optimizer_state_dict': optimizer.state_dict(),
                         'loss': loss_val_min
                         }, model_path)
-                
-            
+
+                model_path_master, model_name = os.path.split(model_path)
+                model_name= model_name.replace('.pt', f'_{ep}.pt')
+                mkdir(os.path.join(model_path_master, 'fno_weight'))
+                model_path_epoch = os.path.join(model_path_master, 'fno_weight', model_name)
+                torch.save({
+                    'epoch': ep,
+                    'model_state_dict': model.state_dict(),
+                    'optimizer_state_dict': optimizer.state_dict(),
+                    'loss': loss_val_min
+                }, model_path_epoch)
+
         t2 = default_timer()
+        log_wandb['Learning Rate'] = scheduler.get_last_lr()[0]
+        wandb.log(log_wandb)
         scheduler.step()
         print('epoch: {0}, loss: {1:.5f}, t2-t1: {2:.5f}, trainL2: {3:.5f}, testL2: {4:.5f}'\
                 .format(ep, loss.item(), t2 - t1, train_l2_full, val_l2_full))

@@ -67,7 +67,7 @@ def setup_diffusion_sorption(filename, seed):
     data_split, _ = torch.utils.data.random_split(
         dataset,
         [ratio, len(dataset) - ratio],
-        generator=torch.Generator(device="cuda").manual_seed(42),
+        generator=torch.Generator(device="cpu").manual_seed(42),
     )
 
     data_gt = data_split[:]
@@ -112,7 +112,7 @@ def setup_diffusion_reaction(filename, seed):
     data_split, _ = torch.utils.data.random_split(
         dataset,
         [ratio, len(dataset) - ratio],
-        generator=torch.Generator(device="cuda").manual_seed(42),
+        generator=torch.Generator(device="cpu").manual_seed(42),
     )
 
     data_gt = data_split[:]
@@ -162,7 +162,7 @@ def setup_swe_2d(filename, seed) -> Tuple[dde.Model, PINNDataset2D]:
     data_split, _ = torch.utils.data.random_split(
         dataset,
         [ratio, len(dataset) - ratio],
-        generator=torch.Generator(device="cuda").manual_seed(42),
+        generator=torch.Generator(device="cpu").manual_seed(42),
     )
 
     data_gt = data_split[:]
