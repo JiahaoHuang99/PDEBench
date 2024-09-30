@@ -1,7 +1,7 @@
 import os
 import argparse
 
-import torch
+# import torch
 from tqdm import tqdm
 import h5py
 import numpy as np
@@ -163,57 +163,58 @@ if __name__ == "__main__":
     # DR2D
     # ------------------------
 
-    pde_name = "DR2D"
-    model_name = "OFormer"
-    submodel_name = "GT"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_dr2d/OFormer_DR2D_Cx1_Tx1/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_dr2d(data_path, save_path)
+    # pde_name = "DR2D"
+    # model_name = "OFormer"
+    # submodel_name = "GT"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_dr2d/OFormer_DR2D_Cx1_Tx1/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_dr2d(data_path, save_path)
+    #
+    # pde_name = "DR2D"
+    # model_name = "OFormer"
+    # submodel_name = "MB"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_dr2d/OMamba_DR2D_Cx1_Tx1/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_dr2d(data_path, save_path)
 
-    pde_name = "DR2D"
-    model_name = "OFormer"
-    submodel_name = "MB"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_dr2d/OMamba_DR2D_Cx1_Tx1/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_dr2d(data_path, save_path)
-
-    # ------------------------
-
-    pde_name = "DR2D"
-    model_name = "GalerkinTransformer"
-    submodel_name = "GT"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/dr2d_pdebench/dr2d_pdebench_gt_Cx1_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_dr2d(data_path, save_path)
-
-    pde_name = "DR2D"
-    model_name = "GalerkinTransformer"
-    submodel_name = "MB"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/dr2d_pdebench/dr2d_pdebench_mb_Cx1_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_dr2d(data_path, save_path)
 
     # ------------------------
 
-    pde_name = "DR2D"
-    model_name = "GNOT"
-    submodel_name = "GT"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/dr2d_pdebench/gnot_dr2d_mse_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_dr2d(data_path, save_path)
+    # pde_name = "DR2D"
+    # model_name = "GalerkinTransformer"
+    # submodel_name = "GT"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/dr2d_pdebench/dr2d_pdebench_gt_Cx1_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_dr2d(data_path, save_path)
+    #
+    # pde_name = "DR2D"
+    # model_name = "GalerkinTransformer"
+    # submodel_name = "MB"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/dr2d_pdebench/dr2d_pdebench_mb_Cx1_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_dr2d(data_path, save_path)
 
-    pde_name = "DR2D"
-    model_name = "GNOT"
-    submodel_name = "MB"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/dr2d_pdebench/mambagnot_dr2d_mse_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_dr2d(data_path, save_path)
+    # ------------------------
+
+    # pde_name = "DR2D"
+    # model_name = "GNOT"
+    # submodel_name = "GT"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/dr2d_pdebench/gnot_dr2d_mse_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_dr2d(data_path, save_path)
+    #
+    # pde_name = "DR2D"
+    # model_name = "GNOT"
+    # submodel_name = "MB"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/dr2d_pdebench/mambagnot_dr2d_mse_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_dr2d(data_path, save_path)
 
 
 
@@ -221,57 +222,57 @@ if __name__ == "__main__":
     # SW2D
     # ------------------------
 
-    pde_name = "SW2D"
-    model_name = "OFormer"
-    submodel_name = "GT"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_sw2d/OFormer_SW2D_Cx1_Tx1/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_sw2d(data_path, save_path)
+    # pde_name = "SW2D"
+    # model_name = "OFormer"
+    # submodel_name = "GT"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_sw2d/OFormer_SW2D_Cx1_Tx1/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_sw2d(data_path, save_path)
+    #
+    # pde_name = "SW2D"
+    # model_name = "OFormer"
+    # submodel_name = "MB"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_sw2d/OMamba_SW2D_Cx1_Tx1/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_sw2d(data_path, save_path)
 
-    pde_name = "SW2D"
-    model_name = "OFormer"
-    submodel_name = "MB"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_sw2d/OMamba_SW2D_Cx1_Tx1/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_sw2d(data_path, save_path)
+    # ------------------------
+    #
+    # pde_name = "SW2D"
+    # model_name = "GalerkinTransformer"
+    # submodel_name = "GT"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/sw2d_pdebench/sw2d_pdebench_gt_Cx1_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_sw2d(data_path, save_path)
+    #
+    # pde_name = "SW2D"
+    # model_name = "GalerkinTransformer"
+    # submodel_name = "MB"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/sw2d_pdebench/sw2d_pdebench_mb_Cx1_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_sw2d(data_path, save_path)
 
     # ------------------------
 
-    pde_name = "SW2D"
-    model_name = "GalerkinTransformer"
-    submodel_name = "GT"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/sw2d_pdebench/sw2d_pdebench_gt_Cx1_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_sw2d(data_path, save_path)
-
-    pde_name = "SW2D"
-    model_name = "GalerkinTransformer"
-    submodel_name = "MB"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGalerkinTransformer/vis/npz/sw2d_pdebench/sw2d_pdebench_mb_Cx1_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_sw2d(data_path, save_path)
-
-    # ------------------------
-
-    pde_name = "SW2D"
-    model_name = "GNOT"
-    submodel_name = "GT"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/sw2d_pdebench/gnot_sw2d_mse_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_sw2d(data_path, save_path)
-
-    pde_name = "SW2D"
-    model_name = "GNOT"
-    submodel_name = "MB"
-    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/sw2d_pdebench/mambagnot_sw2d_mse_test/vis_results.npz"
-    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
-    mkdir(save_path)
-    visualize_sw2d(data_path, save_path)
+    # pde_name = "SW2D"
+    # model_name = "GNOT"
+    # submodel_name = "GT"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/sw2d_pdebench/gnot_sw2d_mse_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_sw2d(data_path, save_path)
+    #
+    # pde_name = "SW2D"
+    # model_name = "GNOT"
+    # submodel_name = "MB"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/sw2d_pdebench/mambagnot_sw2d_mse_test/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_sw2d(data_path, save_path)
 
 
     # ------------------------
@@ -301,6 +302,31 @@ if __name__ == "__main__":
     # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
     # mkdir(save_path)
     # visualize_df2d(data_path, save_path)
+
+    # pde_name = "DF2D"
+    # model_name = "OFormer"
+    # submodel_name = "GT_DIAG"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_darcyflow/OFormer_DarcyFlow_beta1.0_test_diag/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_df2d(data_path, save_path)
+    #
+    # pde_name = "DF2D"
+    # model_name = "OFormer"
+    # submodel_name = "ST_DIAG"
+    # data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_darcyflow/OGTFormer_DarcyFlow_beta1.0_test_diag/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_df2d(data_path, save_path)
+    #
+    # pde_name = "DF2D"
+    # model_name = "OFormer"
+    # submodel_name = "MB_DIAG"
+    # data_path =  "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaOFormer/vis/npz/samples_darcyflow/OMamba_DarcyFlow_beta1.0_test_diag/vis_results.npz"
+    # save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    # mkdir(save_path)
+    # visualize_df2d(data_path, save_path)
+
 
     # ------------------------
 
@@ -355,3 +381,31 @@ if __name__ == "__main__":
     # visualize_df2d(data_path, save_path)
 
     # ------------------------
+
+
+
+    # debug
+
+    pde_name = "DF2D"
+    model_name = "GNOT"
+    submodel_name = "GT"
+    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/darcyflow_pdebench/gnot_darcyflow2d_mse_test/vis_results.npz"
+    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    mkdir(save_path)
+    visualize_df2d(data_path, save_path)
+
+    pde_name = "DF2D"
+    model_name = "GNOT"
+    submodel_name = "ST"
+    data_path = "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/darcyflow_pdebench/stgnot_darcyflow2d_mse_test/vis_results.npz"
+    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    mkdir(save_path)
+    visualize_df2d(data_path, save_path)
+
+    pde_name = "DF2D"
+    model_name = "GNOT"
+    submodel_name = "MB"
+    data_path =  "/media/NAS06/jiahao/Mamba_Transformer_PDE/MambaGNOT/vis/npz/darcyflow_pdebench/mambagnot_darcyflow2d_mse_test/vis_results.npz"
+    save_path = os.path.join('.', 'vis', 'png', model_name, pde_name, submodel_name)
+    mkdir(save_path)
+    visualize_df2d(data_path, save_path)
