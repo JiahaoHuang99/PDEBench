@@ -154,6 +154,57 @@ import math as mt
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+
+class LpLoss(object):
+    '''
+    loss function with rel/abs Lp loss
+    '''
+    def __init__(self, d=2, p=2, size_average=True, reduction=True):
+        super(LpLoss, self).__init__()
+
+        #Dimension and Lp-norm type are postive
+        assert d > 0 and p > 0
+
+        self.d = d
+        self.p = p
+        self.reduction = reduction
+        self.size_average = size_average
+
+    def abs(self, x, y):
+        num_examples = x.size()[0]
+
+        #Assume uniform mesh
+        h = 1.0 / (x.size()[1] - 1.0)
+
+        all_norms = (h**(self.d/self.p))*torch.norm(x.view(num_examples, -1) - y.view(num_examples, -1), self.p, 1)
+
+        if self.reduction:
+            if self.size_average:
+                return torch.mean(all_norms)
+            else:
+                return torch.sum(all_norms)
+
+        return all_norms
+
+    def rel(self, x, y):
+        num_examples = x.size()[0]
+
+        diff_norms = torch.norm(x.reshape(num_examples, -1) - y.reshape(num_examples,-1), self.p, 1)
+        y_norms = torch.norm(y.reshape(num_examples, -1), self.p, 1)
+
+        if self.reduction:
+            if self.size_average:
+                return torch.mean(diff_norms/y_norms)
+            else:
+                return torch.sum(diff_norms/y_norms)
+
+        return diff_norms/y_norms
+
+    def __call__(self, x, y):
+        return self.rel(x, y)
+
+
+
 def metric_func(pred, target, if_mean=True, Lx=1., Ly=1., Lz=1., iLow=4, iHigh=12):
     """
     code for calculate metrics discussed in the Brain-storming session
@@ -305,12 +356,17 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
                 _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F \
                     = metric_func(pred, yy, if_mean=True, Lx=Lx, Ly=Ly, Lz=Lz)
 
+                _err_lpl = LpLoss()(pred, yy)
+
                 if itot == 0:
                     err_RMSE, err_nRMSE, err_CSV, err_Max, err_BD, err_F \
                         = _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F
                     pred_plot = pred[:1]
                     target_plot = yy[:1]
                     val_l2_time = torch.zeros(yy.shape[-2]).to(device)
+
+                    err_lpl = _err_lpl
+
                 else:
                     err_RMSE += _err_RMSE
                     err_nRMSE += _err_nRMSE
@@ -318,7 +374,9 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
                     err_Max += _err_Max
                     err_BD += _err_BD
                     err_F += _err_F
-                    
+
+                    err_lpl += _err_lpl
+
                     mean_dim = [i for i in range(len(yy.shape)-2)]
                     mean_dim.append(-1)
                     mean_dim = tuple(mean_dim)
@@ -352,12 +410,17 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
                 _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F \
                     = metric_func(pred, yy, if_mean=True, Lx=Lx, Ly=Ly, Lz=Lz)
 
+                _err_lpl = LpLoss()(pred, yy)
+
                 if itot == 0:
                     err_RMSE, err_nRMSE, err_CSV, err_Max, err_BD, err_F \
                         = _err_RMSE, _err_nRMSE, _err_CSV, _err_Max, _err_BD, _err_F
                     pred_plot = pred[:1]
                     target_plot = yy[:1]
                     val_l2_time = torch.zeros(yy.shape[-2]).to(device)
+
+                    err_lpl = _err_lpl
+
                 else:
                     err_RMSE += _err_RMSE
                     err_nRMSE += _err_nRMSE
@@ -365,7 +428,9 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
                     err_Max += _err_Max
                     err_BD += _err_BD
                     err_F += _err_F
-                    
+
+                    err_lpl += _err_lpl
+
                     mean_dim = [i for i in range(len(yy.shape)-2)]
                     mean_dim.append(-1)
                     mean_dim = tuple(mean_dim)
@@ -389,6 +454,9 @@ def metrics(val_loader, model, Lx, Ly, Lz, plot, channel_plot, model_name, x_min
     print('Maximum value of rms error: {0:.5f}'.format(err_Max))
     print('RMSE at boundaries: {0:.5f}'.format(err_BD))
     print('RMSE in Fourier space: {0}'.format(err_F))
+
+    err_lpl = np.array(err_lpl.data.cpu() / itot)
+    print('Rel_L2_Norm: {}'.format(err_lpl))
     
     val_l2_time = val_l2_time/itot
     
